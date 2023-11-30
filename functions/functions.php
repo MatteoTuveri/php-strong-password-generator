@@ -1,18 +1,23 @@
 <?php
-function passGen($number)
+function passGen($number, $repeat, $capsCheck, $symbolsCheck, $numbersCheck, $lettersCheck)
 {
-    $letters = 'abcdefghijklmnopqrstuvwxyz';
-    $caps = strtoupper($letters);
-    $symbols = "~! @#$%^&*()_-+={[}]|\:;<,>.?/";
-    $numbers = '0123456789';
+    $letters = ($lettersCheck) ? 'abcdefghijklmnopqrstuvwxyz' : '';
+    $caps = ($capsCheck) ? strtoupper('abcdefghijklmnopqrstuvwxyz') : '';
+    $symbols = ($symbolsCheck) ? "~! @#$%^&*()_-+={[}]|\:;<,>.?/" : '';
+    $numbers = ($numbersCheck) ? '0123456789' : '';
+    $string = $letters . $symbols . $numbers . $caps;
     $password = '';
+
     while (strlen($password) <= $number) {
-        $item = str_split($letters . $caps . $symbols . $numbers)[rand(0, strlen($letters . $caps . $symbols . $numbers) - 1)];
-        if (!str_contains($password, $item)) {
+        $item = str_split($string)[rand(0, strlen($string) - 1)];
+        if ($repeat) {
+            if (!str_contains($password, $item)) {
+                $password .= $item;
+            }
+        } else {
             $password .= $item;
-        } 
+        }
     }
     return $password;
 }
 ;
-?>
