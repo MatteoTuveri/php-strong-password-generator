@@ -22,7 +22,7 @@ include __DIR__ ."/functions/functions.php";
     </header>
     <main class="container d-flex justify-content-center py-5">
         <div class="bg-white rounded-3 p-5">
-            <form action="" method="GET">
+            <form action="index.php" method="GET">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Lunghezza Password</label>
                     <input type="number" class="form-control" id="number" name="pas_limit" max="20" min="5" >
