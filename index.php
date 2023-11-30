@@ -1,9 +1,14 @@
 <?php
+session_destroy();
+session_start();
 include __DIR__ ."/functions/functions.php";
     $pas_limit = $_GET['pas_limit'];
     if($pas_limit){
         $pass = passGen($pas_limit);
-    };
+        $_SESSION['password'] = $pass;
+        header('Location: partials/password.php');
+        exit;
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +27,7 @@ include __DIR__ ."/functions/functions.php";
     </header>
     <main class="container d-flex justify-content-center py-5">
         <div class="bg-white rounded-3 p-5">
-            <form action="index.php" method="GET">
+            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="GET">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Lunghezza Password</label>
                     <input type="number" class="form-control" id="number" name="pas_limit" max="20" min="5" >
@@ -30,7 +35,7 @@ include __DIR__ ."/functions/functions.php";
                 <button type="submit">Send</button>
             </form>
             <?php if($pass){ ?>
-            <h4>Password: <?php echo $pass; ?></h4>
+            <h4>Password: <?= $pass; ?></h4>
             <?php } ?>
         </div>
     </main>
