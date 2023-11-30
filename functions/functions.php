@@ -4,11 +4,15 @@ function passGen($number)
     $letters = 'abcdefghijklmnopqrstuvwxyz';
     $caps = strtoupper($letters);
     $symbols = "~! @#$%^&*()_-+={[}]|\:;<,>.?/";
+    $numbers ='0123456789';
     $password = '';
     while (strlen($password) <= $number) {
-        $password .= str_split($letters . $caps . $symbols)[rand(0, 81)];
-    }
+        $item = str_split($letters . $caps . $symbols.$numbers)[rand(0, strlen($letters . $caps . $symbols.$numbers))];
+        if (!str_contains($password, $item)) {
+        $password .= $item;
+        }
     return $password;
+}
 }
 ;
 ?>
